@@ -1,0 +1,50 @@
+[
+{
+    "Id": 1,
+    "Name": "Landmark Place1",
+    "SellRent": 1,
+    "Type": "House",
+    "Price":12000,
+    "Image":"villa3"
+  },
+  {
+    "Id": 2,
+    "Name": "Landmark Place2",
+    "SellRent": 2,
+    "Type": "House",
+    "Price":160000,
+    "Image": "house2"
+  },
+  {
+    "Id": 3,
+    "Name": "Landmark Place 3",
+    "SellRent": 1,
+    "Type": "Apartment",
+    "Price":14000,
+    "Image": "house3"
+  },
+  {
+    "Id": 4,
+    "Name": "Landmark Place 4",
+    "SellRent": 1,
+    "Type": "Apartment",
+    "Price":17000,
+    "Image": "villa1"
+  },
+  {
+    "Id": 5,
+    "Name": "Landmark Place 5",
+    "SellRent": 2,
+    "Type": "House",
+    "Price":18000
+  }
+  ,
+  {
+    "Id": 6,
+    "Name": "Landmark Place",
+    "SellRent": 2,
+    "Type": "House",
+    "Price":17000,
+    "Image": "house1"
+  }
+]

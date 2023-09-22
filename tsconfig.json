@@ -18,15 +18,23 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/alertifytype.d.ts"
+    ],
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "strictPropertyInitialization": false
+    // "ignoreDeprecations": "5.0"
+    
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
+    
   }
 }

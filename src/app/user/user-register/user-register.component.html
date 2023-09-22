@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col-6 m-auto">
+  <div class="card m-auto">
+    <div class="card-header">
+      Register
+    </div>
+    <div class="card-body">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="form-group col-12">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" 
+            formControlName="userName" >
+
+            <span class="error-block" *ngIf="(userName?.touched || userSubmitted) 
+            && !userName?.valid" 
+            >
+            Please provide Name
+            </span>
+
+        </div>
+
+        <div class="form-group col-12">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" formControlName="email">
+          <span class="error-block" *ngIf="(email?.touched || userSubmitted)
+            && !email?.valid" 
+            >
+            <span *ngIf="email.hasError('required')">
+            Please provide an email
+            </span>
+            <span *ngIf="email.hasError('email')">
+              Please provide a valid email
+            </span>
+          </span>
+            
+        </div>
+
+        <div class="form-group col-12">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password">
+          <span class="error-block" *ngIf="(password?.touched || userSubmitted) 
+            && !password?.valid" 
+            > 
+            <Span *ngIf="password.hasError('required')">
+            Please provide a Password
+          </Span>
+            <span *ngIf="password.hasError('minlength')">
+              Password must be at least 8 characters
+            </span>
+          </span>
+        </div>
+
+        <div class="form-group col-12">
+          <label for="cpassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" formControlName="confirmpassword">
+          <span class="error-block" *ngIf="!confirmpassword?.valid && (confirmpassword?.touched || userSubmitted)" >
+            <span *ngIf="confirmpassword.hasError('required')">
+              Please confirm password
+            </span>
+          </span>
+          <span class="error-block" *ngIf="registrationForm.hasError('notmatched') && !confirmpassword.valid">
+            Password does not match
+          </span>
+          
+        </div>
+
+        <div class="form-group col-12">
+          <label for="mobile" class="form-label">Mobile</label>
+          <input type="text" class="form-control" formControlName="mobile">
+          
+          <span class="error-block" *ngIf="(mobile?.touched || userSubmitted) 
+            && !mobile?.valid" 
+            >
+            <span *ngIf="mobile.hasError('required')">
+              Please provide mobile number
+            </span>
+            <span *ngIf="mobile.hasError('minlength')">
+              Mobile Number must be at least 10 digits
+            </span>
+            <span *ngIf="mobile.hasError('maxlength')">
+              Mobile Number can not be more than 10 digits
+            </span>
+            <span *ngIf="mobile.hasError('pattern')">
+              Mobile Number can not have characters
+            </span>
+            <!-- <span *ngIf="(mobile.hasError('pattern') && mobile.hasError('minlength')) || (mobile.hasError('pattern') && mobile.hasError('maxlength'))">
+              Mobile Number can not have characters
+            </span> -->
+          </span>
+           <!-- <div class="form-group col-12" *ngIf="mobile.errors && (mobile.dirty || mobile.touched)">
+          <p *ngIf="mobile.errors.pattern" class="text-danger">Number Only</p>
+        </div> -->
+        </div>
+        
+        
+
+        <div class="form-group col-12">
+          <button type="submit" class="btn btn-primary" style="margin-top:20px">Register</button>
+          <button type="reset" class="btn btn-secondary ml-2" style="margin-top:20px; margin-left: 10px;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>
