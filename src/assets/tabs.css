@@ -1,0 +1,3 @@
+.nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {
+    border-bottom: 4px solid #e1e2eb;
+    }

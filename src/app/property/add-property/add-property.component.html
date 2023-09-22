@@ -28,7 +28,7 @@
                   <p> BHK </p>
   
                     <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
-                    <div class="btn-group" btnRadioGroup>
+                    <div class="btn-group" btnRadioGroup [(ngModel)]="propertyView.BHK" name="BHK">
                       <label 
                       *ngFor="let bhk of ['1','2','3','4']"
                       class="btn btn-outline-primary mr-2"
@@ -46,7 +46,7 @@
     
                       <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
                       <div class="btn-group" btnRadioGroup name="propType"
-                      [(ngModel)]="propertyView.Type">
+                      [(ngModel)]="propertyView.PType">
                         <label 
                         *ngFor="let propertytype of propertyTypes"
                         class="btn btn-outline-primary mr-2"
@@ -60,11 +60,11 @@
                       <p> Furnish Type</p>
       
                         <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
-                        <div class="btn-group" btnRadioGroup>
+                        <div class="btn-group" btnRadioGroup [(ngModel)]="propertyView.FType" name="FType">
                           <label 
                           *ngFor="let furnishtype of furnishTypes"
                           class="btn btn-outline-primary mr-2"
-                          btnRadio="furnishtype" tabindex="0" role="button" name="furnishType"> {{furnishtype}} 
+                          [btnRadio]="furnishtype" tabindex="0" role="button" name="furnishType"> {{furnishtype}} 
                           </label>
                  
                         </div>
@@ -93,7 +93,7 @@
 
                     <div class="form-group col-12">
                       <label for="name">City</label>
-                      <input type="text" class="form-control" >
+                      <input type="text" class="form-control" [(ngModel)]="propertyView.City" name="City">
                     </div>
             
                     <div class="form-group col-12">
@@ -121,7 +121,7 @@
 
                 <div class="form-group col-12">
                   <label>Built Area (in Sqr Feet)</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="propertyView.BuiltArea" name="BuiltArea">
                 </div>
 
                 <div class="form-group col-12">
@@ -182,7 +182,7 @@
                       <label 
                       *ngFor="let rmove of ['Yes','No']"
                       class="btn btn-outline-primary mr-2"
-                      btnRadio="rmove" tabindex="0" role="button" name="rmove"> {{rmove}} 
+                      [btnRadio]="rmove" tabindex="0" role="button" name="rmove"> {{rmove}} 
                       </label>
              
                     </div>
@@ -218,7 +218,7 @@
                       <label 
                       *ngFor="let gcom of ['Yes','No']"
                       class="btn btn-outline-primary mr-2"
-                      btnRadio="gcom" tabindex="0" role="button" name="gcom"> {{gcom}} 
+                      [btnRadio]="gcom" tabindex="0" role="button" name="gcom"> {{gcom}} 
                       </label>
              
                     </div>
@@ -232,7 +232,7 @@
                         <label 
                         *ngFor="let mentrance of mainEntrance"
                         class="btn btn-outline-primary mr-2"
-                        btnRadio="mentrance" tabindex="0" role="button" name="mentrance"> {{mentrance}} 
+                        [btnRadio]="mentrance" tabindex="0" role="button" name="mentrance"> {{mentrance}} 
                         </label>
                
                       </div>
