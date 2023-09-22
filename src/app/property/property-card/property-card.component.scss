@@ -1,10 +1,14 @@
+.card{
+    min-height: 400px;
+}
 
 .card:hover img{
-    z-index: 5;
+    // z-index: 5;
     transform: scale(1.1,1.1);
     transition-duration: 500ms;
     transition-timing-function: ease-out;
     opacity: 0.5;
+    // height: 250px;
     
 }
 
@@ -12,22 +16,24 @@
     transform: scale(1,1);
     transition-duration: 500ms;
     transition-timing-function: ease-out;
-    height: 270px;;
+    height: 250px;
     width:fit-content;
 }
 
 .card-img-wrapper{
     overflow: hidden;
+    position: relative;
 }
 
 .member-icons{
     position:absolute;
     right:0;
-    top:50%;
+    top:80%;
     bottom:-30%;
     left: 0;
     margin-left: auto;
-    margin-right: auto;    
+    margin-right: auto; 
+    opacity: 0;   
 }
 
 .card-img-wrapper:hover .member-icons{

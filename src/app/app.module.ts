@@ -19,11 +19,14 @@ import { AlertifyService } from './Services/alertify.service';
 import { AuthService } from './Services/auth.service';
 import { BsDropdownConfig, BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabsModule } from'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons'
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
  
 
 const appRoutes: Routes = [
   {path: 'add-property',component: AddPropertyComponent},
-  {path: 'sell-property',component: PropertyListComponent},
+  {path: 'rent-property',component: PropertyListComponent},
   {path: '',component: PropertyListComponent},
   {path: 'property-detail/:id',component: PropertyDetailComponent},
   {path: 'user/login',component: UserLoginComponent},
@@ -53,7 +56,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule ,
     BsDropdownModule,
     BrowserAnimationsModule,
-  
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    BsDatepickerModule.forRoot()
 
   ],
 

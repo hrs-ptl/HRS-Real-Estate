@@ -3,7 +3,7 @@
     <div class="card-img-wrapper">
         <img *ngIf="property.Image" src="assets/images/{{property.Image}}.jpg" class="propimage">
         <img *ngIf="!property.Image" src="assets/images/house_default.jpg" class="propimage">
-        <ul class="list-inline text-center member-icons animate">
+        <ul *ngIf="!hideIcons" class="list-inline text-center member-icons animate">
             <li class="list-inline-item">
                 <button class="btn btn-primary" routerLink="/property-detail/{{property.Id}}"><i class="fa fa-eye" aria-hidden="true"></i></button>
             </li>
