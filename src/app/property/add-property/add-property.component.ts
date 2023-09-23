@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { IpropertyBase } from 'src/app/model/ipropertybase';
@@ -11,8 +11,10 @@ import { IpropertyBase } from 'src/app/model/ipropertybase';
   styleUrls: ['./add-property.component.css']
 })
 export class AddPropertyComponent implements OnInit {
-  @ViewChild('Form') addPropertyForm: NgForm;
+  // @ViewChild('Form') addPropertyForm: NgForm;
   @ViewChild('formTabs') formTabs?: TabsetComponent;
+
+  addPropertyForm:FormGroup;
 
 // from the DBs afterwards
   propertyTypes: Array<string> = ['House','Apartment', 'Duplex' ]
@@ -32,9 +34,23 @@ export class AddPropertyComponent implements OnInit {
     City: null
   };
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private fb:FormBuilder) { }
 
   ngOnInit() {
+this.CreateAddPropertyForm();
+    
+  }
+
+  CreateAddPropertyForm( ){
+    this.addPropertyForm = this.fb.group({
+      SellRent: [null, Validators.required],
+      PType: [null,Validators.required],
+      Name: [null,Validators.required],
+      BuiltArea: [null,Validators.required],
+      Price: [null,Validators.required]
+      
+    })
   }
 
   onNext()
@@ -44,8 +60,9 @@ export class AddPropertyComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('congrats');
+    console.log('congrats,the property form has been successfully submitted');
     console.log(this.addPropertyForm);
+    console.log('SellRent=',this.addPropertyForm.value.SellRent);
     
   }
 

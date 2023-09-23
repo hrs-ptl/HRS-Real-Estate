@@ -5,48 +5,56 @@
         <h3> List your Property </h3>
       </div>
       <div class="card-body">
-        <form (ngSubmit)='onSubmit()' #Form="ngForm">
+        <form (ngSubmit)='onSubmit()' [formGroup]="addPropertyForm">
 
           <div>
-            <tabset #formTabs>
+            <tabset class="member-tabset" #formTabs>
           
-              <tab heading="Basic Info">
+              <tab heading="Basic Info" >
+
+              <!-- Sell rent selection  -->
                 <div class="form-group col-12">
                 <p> I want to </p>
 
-                  <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
-                  <div class="btn-group" btnRadioGroup>
+                  <div class="btn-group" btnRadioGroup  formControlName="SellRent">
                     <label class="btn btn-outline-primary mr-2"
-                    btnRadio="A" tabindex="0" role="button" name="SellRent"> Sell </label>
+                    btnRadio="1" tabindex="0" role="button" name="SellRent"> Sell </label>
           
                     <label class="btn btn-outline-primary" 
-                    btnRadio="B" tabindex="0" role="button" name="SellRent"> Rent</label>
+                    btnRadio="2" tabindex="0" role="button" name="SellRent"> Rent</label>
                   </div>
+                  <!-- <div class="error-block" *ngIf="SellRent.invalid && nextClicked">
+                    Please select sell or rent
+                  </div> -->
                 </div>
-
+                
+              <!-- BHK -->
                 <div class="form-group col-12">
                   <p> BHK </p>
   
-                    <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
-                    <div class="btn-group" btnRadioGroup [(ngModel)]="propertyView.BHK" name="BHK">
+                    <div class="btn-group" btnRadioGroup  name="BHK" 
+                    [(ngModel)]="propertyView.BHK"
+                    [ngModelOptions]="{standalone:true}">
                       <label 
                       *ngFor="let bhk of ['1','2','3','4']"
                       class="btn btn-outline-primary mr-2"
-                      [btnRadio]="bhk" tabindex="0" role="button" name="BHK"> {{bhk}} 
+                      [btnRadio]="bhk" tabindex="0" role="button" name="BHK"
+                      
+                      > {{bhk}}
                       </label>
-             
+              
                     </div>
                 </div>
 
                 <div>
                   
-            
+              <!-- property type selection -->
                   <div class="form-group col-12">
                     <p> Property Type</p>
     
-                      <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
-                      <div class="btn-group" btnRadioGroup name="propType"
-                      [(ngModel)]="propertyView.PType">
+                      
+                      <div class="btn-group" btnRadioGroup formControlName="PType"
+                      [(ngModel)]="propertyView.PType" >
                         <label 
                         *ngFor="let propertytype of propertyTypes"
                         class="btn btn-outline-primary mr-2"
@@ -54,130 +62,153 @@
                         </label>
                
                       </div>
-                    </div>
+                  </div>
 
-                    <div class="form-group col-12">
-                      <p> Furnish Type</p>
-      
-                        <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
-                        <div class="btn-group" btnRadioGroup [(ngModel)]="propertyView.FType" name="FType">
-                          <label 
-                          *ngFor="let furnishtype of furnishTypes"
-                          class="btn btn-outline-primary mr-2"
-                          [btnRadio]="furnishtype" tabindex="0" role="button" name="furnishType"> {{furnishtype}} 
-                          </label>
-                 
-                        </div>
-                    </div>
-            
-                    <div class="form-group col-12">
-                      <label for="name">in Society/Building/Project</label>
-                      <input type="text" class="form-control" #propName="ngModel" 
-                      ngModel name="Name" required minlength="5"  [(ngModel)]="propertyView.Name">
-                      <span *ngIf="!propName.valid && propName.touched" class="error-block">
-                      <span *ngIf="propName.errors?.['required']"> Please fill the above</span>
-                      <span *ngIf="propName.errors?.['minlength']"> Must be at least 5 char long</span>
-                      </span>
-                    </div>
-
-
-                    <!-- <div class="form-group col-12">
-                      <label for="name">in Society/Building/Project</label>
-                      <input type="text" class="form-control"
-                      #propName="ngModel" 
-                      ngModel name="Name"
-                      required
-                      minlength="5"
-                      [(ngModel)]="propertyView.Name" >
-                    </div> -->
-
-                    <div class="form-group col-12">
-                      <label for="name">City</label>
-                      <input type="text" class="form-control" [(ngModel)]="propertyView.City" name="City">
-                    </div>
-            
-                    <div class="form-group col-12">
-                      <button (click)="selectTab(1)" type="button" class="btn btn-primary btn-block">Next</button>
+              <!-- Furnish Type -->
+                  <div class="form-group col-12">
+                    <p> Furnish Type</p>
+    
                       
-                    </div>
+                      <div class="btn-group" btnRadioGroup [(ngModel)]="propertyView.FType" [ngModelOptions]="{standalone:true}" name="FType" >
+                        <label 
+                        *ngFor="let furnishtype of furnishTypes"
+                        class="btn btn-outline-primary mr-2"
+                        [btnRadio]="furnishtype" tabindex="0" role="button" name="furnishType"> {{furnishtype}} 
+                        </label>
+                
+                      </div>
+                  </div>
+
+              <!-- in Society/Building/Project -->
+                  <div class="form-group col-12">
+                    <label for="name">in Society/Building/Project</label>
+                    <input type="text" class="form-control" 
+                      formControlName="Name" required minlength="5"  [(ngModel)]="propertyView.Name">
+                    <!-- <span *ngIf="!propName.valid && propName.touched" class="error-block">
+                    <span *ngIf="propName.errors?.['required']"> Please fill the above</span>
+                    <span *ngIf="propName.errors?.['minlength']"> Must be at least 5 char long</span> -->
+                    <!-- </span> -->
+                  </div>
+
+
+                  <!-- <div class="form-group col-12">
+
+                    <label for="name">in Society/Building/Project</label>
+                    <input type="text" class="form-control"
+                    #propName="ngModel" 
+                    ngModel name="Name"
+                    required
+                    minlength="5"
+                    [(ngModel)]="propertyView.Name" >
+                  </div> -->
+              
+              <!-- City -->
+                  <div class="form-group col-12">
+                    <label for="name">City</label>
+                    <input type="text" class="form-control" [(ngModel)]="propertyView.City" [ngModelOptions]="{standalone:true}" name="City">
+                  </div>
+          
+              <!-- Next button -->
+                  <div class="form-group col-12">
+                    <button  (click)="selectTab(1)" type="button" class="btn btn-primary btn-block">Next</button>
+                    
+                  </div>
                 </div>
               </tab>
+
+            <!-- Tab 2 -->
               <tab heading="Pricing and Area info">
 
+              <!-- Price in (CAD) -->
                 <div class="form-group col-12">
-                  <label>Price (in USD)</label>
-                  <input type="text" class="form-control" ngModel name="price" [(ngModel)]="propertyView.Price" >
+                  <label>Price (in CAD)</label>
+                  <input type="text" class="form-control" ngModel formControlName="Price" [(ngModel)]="propertyView.Price" 
+                  >
                 </div>
 
+              <!-- Security in CAD -->
                 <div class="form-group col-12">
-                  <label>Security (in USD)</label>
+                  <label>Security (in CAD)</label>
                   <input type="text" class="form-control">
                 </div>
 
+              <!-- Maintenance (in CAD) -->
                 <div class="form-group col-12">
-                  <label>Maintenance (in USD)</label>
+                  <label>Maintenance (in CAD)</label>
                   <input type="text" class="form-control">
                 </div>
 
+              <!-- Built Area (in Sqr Feet) -->
                 <div class="form-group col-12">
                   <label>Built Area (in Sqr Feet)</label>
-                  <input type="text" class="form-control" [(ngModel)]="propertyView.BuiltArea" name="BuiltArea">
+                  <input type="text" class="form-control" [(ngModel)]="propertyView.BuiltArea" formControlName="BuiltArea">
                 </div>
 
+              <!-- Carpet Area(in Sqr Feet) -->
                 <div class="form-group col-12">
                   <label>Carpet Area(in Sqr Feet)</label>
                   <input type="text" class="form-control">
                 </div>
 
+              <!-- back button tab2  -->
                 <button (click)="selectTab(0)" 
                 type="button" class="btn btn-primary btn-block">
                 Back</button>
-                
+              
+              <!-- Next button tab2 -->
                 <button (click)="selectTab(2)" 
                 type="button" class="btn btn-primary btn-block">
                 Next</button>
 
               </tab>
 
+            <!-- Tab 3 -->
               <tab heading="Address">
 
+              <!-- Floor -->
                 <div class="form-group col-12">
                   <label>Floor</label>
                   <input type="text" class="form-control">
                 </div>
 
+              <!-- Total Floor -->
                 <div class="form-group col-12">
                   <label>Total Floor</label>
                   <input type="text" class="form-control">
                 </div>
 
+              <!-- Address -->
                 <div class="form-group col-12">
                   <label>Address</label>
                   <input type="text" class="form-control">
                 </div>
 
+              <!-- Landmark -->
                 <div class="form-group col-12">
                   <label>Landmark</label>
                   <input type="text" class="form-control">
                 </div>
 
+              <!-- Back button tab3 -->
                 <button (click)="selectTab(1)" 
                 type="button" class="btn btn-primary btn-block">
                 Back</button>
-                
+              
+              <!-- Next button tab3  -->
                 <button (click)="selectTab(3)" 
                 type="button" class="btn btn-primary btn-block">
                 Next</button>
 
               </tab>
 
+            <!-- Tab 4 -->
               <tab heading="Other details">
 
-
+              <!-- Ready to move -->
                 <div class="form-group col-12">
                   <p> Ready to move</p>
   
-                    <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
+                   
                     <div class="btn-group" btnRadioGroup>
                       <label 
                       *ngFor="let rmove of ['Yes','No']"
@@ -196,6 +227,8 @@
                   <label class="m-2">No</label>
                 </div> -->
 
+
+              <!-- Possession/Avaialble From date picker-->
                 <div class="form-group col-3">
                   <label>Possession/Avaialble From</label>
                   <input type="text"
@@ -205,15 +238,17 @@
 
                 </div>
 
+              <!-- Age of Property -->
                 <div class="form-group col-12">
                   <label>Age of Property</label>
                   <input type="number" class="form-control" width="40px">
                 </div>
 
+              <!-- Gated community -->
                 <div class="form-group col-12">
                   <p> Gated community</p>
   
-                    <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
+                    
                     <div class="btn-group" btnRadioGroup>
                       <label 
                       *ngFor="let gcom of ['Yes','No']"
@@ -222,22 +257,24 @@
                       </label>
              
                     </div>
-                  </div>
+                </div>
 
-                  <div class="form-group col-12">
-                    <p> Main entrance</p>
-    
-                      <!-- <pre class="card card-block card-header">{{uncheckableRadioModel  || 'null'}}</pre> -->
-                      <div class="btn-group" btnRadioGroup>
-                        <label 
-                        *ngFor="let mentrance of mainEntrance"
-                        class="btn btn-outline-primary mr-2"
-                        [btnRadio]="mentrance" tabindex="0" role="button" name="mentrance"> {{mentrance}} 
-                        </label>
-               
-                      </div>
+              <!-- Main entrance -->
+                <div class="form-group col-12">
+                  <p> Main entrance</p>
+  
+                    
+                    <div class="btn-group" btnRadioGroup>
+                      <label 
+                      *ngFor="let mentrance of mainEntrance"
+                      class="btn btn-outline-primary mr-2"
+                      [btnRadio]="mentrance" tabindex="0" role="button" name="mentrance"> {{mentrance}} 
+                      </label>
+              
                     </div>
+                </div>
 
+              <!-- Description -->
                 <div class="form-group col-12">
                   <label>Description</label>
                   <textarea type="text" class="form-control" rows="6"></textarea>
@@ -253,7 +290,7 @@
 
               </tab>
 
-
+            <!-- Tab 4 -->
               <tab heading="Photos">
 
                 <div class="form-group col-12">
@@ -266,7 +303,7 @@
                 <button (click)="selectTab(3)" type="button" class="btn btn-primary btn-block">Back</button>
 
                 <button type="reset" class="btn btn-primary btn-block">Cancel</button>
-                <button [disabled]="!Form.valid" type="submit" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
                   
                 
               </tab>
