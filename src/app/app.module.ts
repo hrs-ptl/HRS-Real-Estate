@@ -22,13 +22,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from'ngx-bootstrap/tabs';
 import { ButtonsModule } from 'ngx-bootstrap/buttons'
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
+import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
  
 
 const appRoutes: Routes = [
   {path: 'add-property',component: AddPropertyComponent},
   {path: 'rent-property',component: PropertyListComponent},
   {path: '',component: PropertyListComponent},
-  {path: 'property-detail/:id',component: PropertyDetailComponent},
+  {path: 'property-detail/:id',
+          component: PropertyDetailComponent, 
+          resolve:{prp: PropertyDetailResolverService}},
   {path: 'user/login',component: UserLoginComponent},
   {path: 'user/register',component: UserRegisterComponent},
   {path: '**',component: PropertyListComponent}
@@ -68,7 +71,8 @@ const appRoutes: Routes = [
     UserServiceService,
     AlertifyService,
     AuthService,
-    { provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }
+    { provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } },
+    PropertyDetailResolverService
   ],
   bootstrap: [AppComponent]
 })

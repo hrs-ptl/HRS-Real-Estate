@@ -14,6 +14,7 @@ export class Property implements IpropertyBase{
     RTM: string;
     City: number;
     AOP?: string;
+    Age: number;
     Maintenance?: string;
     Address: string;
     Address2?: string;
