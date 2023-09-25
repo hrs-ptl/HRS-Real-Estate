@@ -212,6 +212,7 @@ this.CreateAddPropertyForm();
   }
 
   mapProperty(): void{
+    this.property.Id = this.housingService.newPropID();
     this.property.SellRent = +this.SellRent.value;
     this.property.BHK= this.BHK.value;
     this.property.PType= this.PType.value;
