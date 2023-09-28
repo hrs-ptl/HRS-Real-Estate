@@ -23,7 +23,8 @@ export class AddPropertyComponent implements OnInit {
 // from the DBs afterwards
   propertyTypes: Array<string> = ['House','Apartment', 'Duplex' ]
   furnishTypes: Array<string> = ['Fully','Semi', 'Unfurnished' ]
-  mainEntrance: Array<string> = ['East','West', 'North', 'South' ]
+  mainEntrance: Array<string> = ['East','West', 'North', 'South']
+  cityList: Array<string>= []
 
   propertyView: IpropertyBase = {
     Id: null,
@@ -35,7 +36,7 @@ export class AddPropertyComponent implements OnInit {
     BHK: null,
     BuiltArea: null,
     RTM: null,
-    City: null
+    City: ''
   };
 
   constructor(private router: Router,
@@ -44,8 +45,12 @@ export class AddPropertyComponent implements OnInit {
               private alertify:AlertifyService) { }
 
   ngOnInit() {
-this.CreateAddPropertyForm();
-    
+    this.CreateAddPropertyForm();
+    this.housingService.getAllCities().subscribe(data =>{
+      this.cityList = data;
+      console.log(data);
+    })
+
   }
 
   CreateAddPropertyForm( ){
@@ -78,7 +83,7 @@ this.CreateAddPropertyForm();
         Gated: [null],
         MainEntrance: [null],
         Description: [null]
-      })      
+      })
     })
   }
 
@@ -244,7 +249,7 @@ this.CreateAddPropertyForm();
   }
 
   alltabsvalid():boolean{
-    
+
     if (this.BasicInfo.invalid){
       this.formTabs.tabs[0].active = true;
       return false;
@@ -270,10 +275,10 @@ this.CreateAddPropertyForm();
   selectTab(tabId: number, IsCurrentTabValid: boolean) {
     this.NextClicked=true;
     if (IsCurrentTabValid){
-      
+
         this.formTabs.tabs[tabId].active = true;
-      
-    } 
+
+    }
   }
 
   // disableEnable() {
