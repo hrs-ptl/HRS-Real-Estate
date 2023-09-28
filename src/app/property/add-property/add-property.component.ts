@@ -24,7 +24,7 @@ export class AddPropertyComponent implements OnInit {
   propertyTypes: Array<string> = ['House','Apartment', 'Duplex' ]
   furnishTypes: Array<string> = ['Fully','Semi', 'Unfurnished' ]
   mainEntrance: Array<string> = ['East','West', 'North', 'South']
-  cityList: Array<string>= []
+  cityList: any[];
 
   propertyView: IpropertyBase = {
     Id: null,
@@ -240,11 +240,6 @@ export class AddPropertyComponent implements OnInit {
     this.property.Possession= this.PossessionOn.value;
     this.property.Description= this.Description.value;
     this.property.PostedOn= new Date().toString();
-    this.property.FType= this.FType.value;
-    this.property.FType= this.FType.value;
-    this.property.FType= this.FType.value;
-    this.property.FType= this.FType.value;
-    this.property.FType= this.FType.value;
 
   }
 
