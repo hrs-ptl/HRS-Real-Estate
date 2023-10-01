@@ -7,10 +7,9 @@ namespace WebAPI.Models
 
         public string? Name { get; set; }
 
-        public static implicit operator string(City v)
-        {
-            throw new NotImplementedException();
-        }
+        public DateTime LastUpdatedOn { get; set; }
+
+        public int LastUpdatedBy { get; set; }
 
     }
 }
