@@ -11,7 +11,7 @@ namespace WebAPI.Interfaces
          void DeleteCity(int cityId);
 
          Task<City>FindCity(int id);
-          
+        // Task Authenticate(string userName, string password);
 
     }
 }
