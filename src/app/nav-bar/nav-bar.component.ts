@@ -6,7 +6,7 @@ import { AlertifyService } from '../Services/alertify.service';
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
-  
+
 })
 export class NavBarComponent implements OnInit {
 
@@ -18,13 +18,14 @@ export class NavBarComponent implements OnInit {
   }
 
   loggedin(){
-    this.loggedinUser = localStorage.getItem('token');
+    this.loggedinUser = localStorage.getItem('userName');
     return this.loggedinUser;
 
   }
 
   onLogout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('userName');
     this.router.navigate(['/user/login'])
     this.alertify.success("You are logged out")
   }
@@ -33,7 +34,7 @@ export class NavBarComponent implements OnInit {
     'And another choice for you.',
     'but wait! A third!'
   ];
- 
+
   onHidden(): void {
     console.log('Dropdown is hidden');
   }

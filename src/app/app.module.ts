@@ -14,7 +14,6 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
-import { UserServiceService } from './Services/user-service.service';
 import { AlertifyService } from './Services/alertify.service';
 import { AuthService } from './Services/auth.service';
 import { BsDropdownConfig, BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -26,23 +25,23 @@ import { PropertyDetailResolverService } from './property/property-detail/proper
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
- 
+
 
 const appRoutes: Routes = [
   {path: 'add-property',component: AddPropertyComponent},
   {path: 'rent-property',component: PropertyListComponent},
   {path: '',component: PropertyListComponent},
   {path: 'property-detail/:id',
-          component: PropertyDetailComponent, 
+          component: PropertyDetailComponent,
           resolve:{prp: PropertyDetailResolverService}},
   {path: 'user/login',component: UserLoginComponent},
   {path: 'user/register',component: UserRegisterComponent},
   {path: '**',component: PropertyListComponent}
- 
+
 ]
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     PropertyCardComponent,
     PropertyListComponent,
@@ -53,10 +52,10 @@ const appRoutes: Routes = [
     UserRegisterComponent,
     FilterPipe,
     SortPipe
-    
+
   ],
   imports: [
-    
+
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
@@ -74,7 +73,6 @@ const appRoutes: Routes = [
   providers: [
     HttpClient,
     HousingService,
-    UserServiceService,
     AlertifyService,
     AuthService,
     { provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } },

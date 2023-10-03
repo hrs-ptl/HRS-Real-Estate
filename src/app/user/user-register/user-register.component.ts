@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { UserServiceService } from 'src/app/Services/user-service.service';
-import { User } from 'src/app/model/user';
+import { UserForRegister } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/Services/alertify.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-user-register',
@@ -13,10 +13,10 @@ export class UserRegisterComponent implements OnInit {
   [x: string]: any;
 
   registrationForm: FormGroup;
-  user:User;
+  user:UserForRegister;
   userSubmitted: boolean;
-  constructor(private fb :FormBuilder, 
-              private userservice: UserServiceService,
+  constructor(private fb :FormBuilder,
+              private authservice: AuthService,
               private alertify:AlertifyService) { }
 
   ngOnInit() {
@@ -74,17 +74,23 @@ export class UserRegisterComponent implements OnInit {
     if(this.registrationForm.valid)
       {
         // this.user= Object.assign(this.user, this.registrationForm.value);
-        this.userservice.addUser(this.userData());
-        this.registrationForm.reset();
-        this.userSubmitted= false;
-        this.alertify.success("Congrats, you are successfully registered.")
+        this.authservice.registerUser(this.userData()).subscribe(() => {
+          this.registrationForm.reset();
+          this.userSubmitted= false;
+          this.alertify.success("Congrats, you are successfully registered.")
+        }, error => {
+          console.log(error);
+          this.alertify.error(error.error);
+        }
+         );
+
       }
-      else 
+      else
       {
         this.alertify.error("Kindly provide the required fields.");
       }
     }
-  userData(): User{
+  userData(): UserForRegister{
     return this.user={
       userName: this.userName.value,
       email: this.email.value,
@@ -95,6 +101,6 @@ export class UserRegisterComponent implements OnInit {
   }
 
 
-  
+
 
 }
