@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Dtos;
+using WebAPI.Errors;
 using WebAPI.Interfaces;
 using WebAPI.Models;
 
@@ -27,9 +28,14 @@ namespace WebAPI.Controllers
         {
             var user = await uow.UserRepository.Authenticate(loginReq.UserName, loginReq.Password);
 
+            ApiError apiError = new ApiError();
+
             if(user == null)
             {
-                return Unauthorized("Invalid User ID or Password");
+                apiError.ErrorCode=Unauthorized().StatusCode;
+                apiError.ErrorMessage="Invalid User ID or Password";
+                apiError.ErrorDetails="This error appear when provided user id or password does not exist"; 
+                return Unauthorized(apiError);
             } 
 
             var loginRes = new LoginResDto();
@@ -41,8 +47,25 @@ namespace WebAPI.Controllers
          [HttpPost("register")]
         public async Task<IActionResult> Register(LoginReqDto loginReq)
         {
+            ApiError apiError = new ApiError();
+
+            // if(loginReq.UserName.string.IsNullOrEmpty){
+            //     apiError.ErrorCode=BadRequest().StatusCode;
+            //     apiError.ErrorMessage="Username and/or password is blank";
+            //     return BadRequest(apiError);
+            // }
+
+
+
             if (await uow.UserRepository.UserAlreadyExists(loginReq.UserName))
-                return BadRequest("User already exist, please try with a different username");
+            {
+
+                apiError.ErrorCode=BadRequest().StatusCode;
+                apiError.ErrorMessage="User already exists, please try with a different Name";
+                apiError.ErrorDetails="Occurs when username matches with existing entries in DB";
+                return BadRequest(apiError);
+            }
+
 
             uow.UserRepository.Register(loginReq.UserName, loginReq.Password);
             await uow.SaveASync();
