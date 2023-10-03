@@ -10,11 +10,19 @@ using WebAPI.Extensions;
 using WebAPI.Helpers;
 using WebAPI.Interfaces;
 using WebAPI.Middlewares;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+var sqlbuilder = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("Default"));
+
+sqlbuilder.Password = builder.Configuration.GetSection("DBPassword").Value;
+
+var connectionstring = sqlbuilder.ConnectionString;
+
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionstring));
 builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -47,6 +55,9 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseRouting();
+
+app.UseHsts();
+app.UseHttpsRedirection();
 
 app.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
