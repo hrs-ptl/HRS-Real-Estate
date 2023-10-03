@@ -25,13 +25,12 @@ export class UserLoginComponent implements OnInit {
       (response:UserForLogin) => {
         console.log(response);
         const user = response;
+        if(user){
         localStorage.setItem('token', user.token)
         localStorage.setItem('userName', user.userName)
         this.alertify.success('Login Successfull');
         this.router.navigate(['/'])
-      }, error => {
-        console.log(error);
-        this.alertify.error(error.error);
+        }
       }
     );
     // console.log('Login info filled',loginForm.value);

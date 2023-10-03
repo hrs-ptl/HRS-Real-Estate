@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import{HttpClientModule } from '@angular/common/http'
+import{HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import{HttpClient } from '@angular/common/http'
 import {Routes, RouterModule} from '@angular/router'
 
@@ -25,6 +25,7 @@ import { PropertyDetailResolverService } from './property/property-detail/proper
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
+import { HttpErrorInterceptorService } from './Services/httperror-interceptor.service';
 
 
 const appRoutes: Routes = [
@@ -76,7 +77,12 @@ const appRoutes: Routes = [
     AlertifyService,
     AuthService,
     { provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } },
-    PropertyDetailResolverService
+    PropertyDetailResolverService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
