@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { catchError, throwError } from "rxjs";
+import { catchError, concatMap, of, retryWhen, throwError } from "rxjs";
 import { AlertifyService } from "./alertify.service";
 import { Injectable } from "@angular/core";
 
@@ -15,6 +15,17 @@ export class HttpErrorInterceptorService implements HttpInterceptor{
       console.log("HTTP Request Started");
       return next.handle(request)
         .pipe(
+          retryWhen(error =>
+            error.pipe(
+              concatMap((checkErr: HttpErrorResponse, count: number) => {
+                if(checkErr.status === 0) {
+                  return of(checkErr);
+                }
+                return throwError(checkErr);
+              })
+            )
+
+          ),
           catchError((error: HttpErrorResponse) => {
             const errorMessage = this.setError(error);
             console.log(error);
@@ -23,6 +34,8 @@ export class HttpErrorInterceptorService implements HttpInterceptor{
           })
         );
   }
+
+
 
   setError(error: HttpErrorResponse) :string{
     let errorMessage = 'Unknown error occured';
@@ -38,3 +51,7 @@ export class HttpErrorInterceptorService implements HttpInterceptor{
     return errorMessage;
   }
 }
+// function retrywhen(): import("rxjs").OperatorFunction<HttpEvent<any>, unknown> {
+//   throw new Error("Function not implemented.");
+// }
+
