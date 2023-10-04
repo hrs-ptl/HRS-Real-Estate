@@ -51,7 +51,7 @@ namespace WebAPI.Migrations
                     BHK = table.Column<int>(type: "int", nullable: false),
                     FurnishingTypeId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
-                    BuitlArea = table.Column<int>(type: "int", nullable: false),
+                    BuiltArea = table.Column<int>(type: "int", nullable: false),
                     CarpetArea = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address2 = table.Column<string>(type: "nvarchar(max)", nullable: true),

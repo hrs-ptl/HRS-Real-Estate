@@ -21,7 +21,7 @@ namespace WebAPI.Models
 
        public int Price { get; set; }
 
-       public int BuitlArea { get; set; }
+       public int BuiltArea { get; set; }
 
        public int CarpetArea { get; set; }
     
