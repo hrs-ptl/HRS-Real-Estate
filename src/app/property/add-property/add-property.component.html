@@ -37,7 +37,7 @@
                   <p> BHK </p>
 
                     <div class="btn-group" btnRadioGroup formControlName="BHK"
-                    [(ngModel)]="propertyView.BHK"
+                    [(ngModel)]="propertyView.bhk"
                     >
                       <label
                       *ngFor="let bhk of ['1','2','3','4']"
@@ -62,7 +62,7 @@
 
 
                       <div class="btn-group" btnRadioGroup formControlName="PType"
-                      [(ngModel)]="propertyView.PType" >
+                      [(ngModel)]="propertyView.propertyType" >
                         <label
                         *ngFor="let propertytype of propertyTypes"
                         class="btn btn-outline-primary mr-2"
@@ -81,7 +81,7 @@
                     <p> Furnish Type</p>
 
 
-                      <div class="btn-group" btnRadioGroup [(ngModel)]="propertyView.FType"  formControlName="FType" >
+                      <div class="btn-group" btnRadioGroup [(ngModel)]="propertyView.furnishingType"  formControlName="FType" >
                         <label
                         *ngFor="let furnishtype of furnishTypes"
                         class="btn btn-outline-primary mr-2"
@@ -99,7 +99,7 @@
                   <div class="form-group col-12">
                     <label for="name">in Society/Building/Project</label>
                     <input type="text" class="form-control"
-                      formControlName="Name"  [(ngModel)]="propertyView.Name">
+                      formControlName="Name"  [(ngModel)]="propertyView.name">
 
                       <div class="error-block" *ngIf="Name.invalid && (NextClicked || Name.touched)">
                         Please fill the above
@@ -125,7 +125,7 @@
               <!-- City -->
                   <div class="form-group col-12">
                     <label for="City">City</label>
-                    <select class="form-control" [(ngModel)]="propertyView.City" formControlName="City">
+                    <select class="form-control" [(ngModel)]="propertyView.city" formControlName="City">
                       <option value=""> ---Select City--- </option>
                       <option *ngFor="let city of cityList" value="{{city.name}}">
                         {{city.name}}
@@ -153,7 +153,7 @@
                 <div class="form-group col-12">
                   <label *ngIf="SellRent.value==1">Price (in CAD)</label>
                   <label *ngIf="SellRent.value==2">Rent (in CAD)</label>
-                  <input type="text" class="form-control" ngModel formControlName="Price" [(ngModel)]="propertyView.Price"
+                  <input type="text" class="form-control" ngModel formControlName="Price" [(ngModel)]="propertyView.price"
                   >
                   <div class="error-block"
                   *ngIf="Price.invalid && (NextClicked || Price.touched)">
@@ -178,7 +178,7 @@
               <!-- Built Area (in Sqr Feet) -->
                 <div class="form-group col-12">
                   <label>Built Area (in Sqr Feet)</label>
-                  <input type="text" class="form-control" [(ngModel)]="propertyView.BuiltArea" formControlName="BuiltArea">
+                  <input type="text" class="form-control" [(ngModel)]="propertyView.builtArea" formControlName="BuiltArea">
                   <div class="error-block"
                   *ngIf="BuiltArea.invalid && (NextClicked || BuiltArea.touched)">
                     Please enter Built Area of the house

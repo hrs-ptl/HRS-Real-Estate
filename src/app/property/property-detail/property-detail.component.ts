@@ -16,9 +16,9 @@ public propertyId: number;
 property = new Property();
 galleryOptions: NgxGalleryOptions[];
 galleryImages: NgxGalleryImage[];
- 
+
 constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private router: Router,
     private housingservice: HousingService
     ) { }
@@ -30,6 +30,8 @@ constructor(
         this.property! = data['prp']
       }
     );
+
+    this.property.age = this.housingservice.getPropertyAge(this.property.estPossessionOn);
 
     // this.route.params.subscribe(
     //   (params) => {
@@ -43,8 +45,8 @@ constructor(
     // )
     this.galleryOptions = [
       {
-        width: '205%',
-        height: '465px',
+        width: '100%',
+        height: '500px',
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide
       },
